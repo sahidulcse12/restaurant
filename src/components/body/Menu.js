@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import DISHES from '../../data/dishes.js';
 import MenuItem from './MenuItem';
 import DishDetails from './DishDetails';
-import { CardColumns, Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 
 const Menus = () => {
+
+    document.title = 'Menus';
 
     const [dishes, setDishes] = useState(DISHES);
     const [selectedDish, setSelectedDish] = useState(null);

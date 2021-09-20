@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardImg, CardImgOverlay, CardTitle, CardText } from 'reactstrap';
+import { Card, CardBody, CardImg, CardTitle, CardText } from 'reactstrap';
 import LoadComments from './LoadComments';
 
 const DishDetails = (props) => {
