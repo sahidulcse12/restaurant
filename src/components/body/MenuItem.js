@@ -4,13 +4,13 @@ import { Card, CardImg, CardImgOverlay, CardBody, CardTitle } from 'reactstrap';
 const MenuItem = props => {
     return (
         <div className="col-md-4">
-            <Card style={{ margin: "10px" }}>
+            <Card style={{ margin: "10px", fontSize: "20px", fontWeight: "bold" }}>
                 <CardBody>
                     <CardImg
                         width="100%"
                         alt={props.dish.name}
                         src={props.dish.image}
-                        style={{ opacity: "0.5" }} />
+                        style={{ opacity: "0.7" }} />
                     <CardImgOverlay>
                         <CardTitle
                             style={{ cursor: "pointer" }}
