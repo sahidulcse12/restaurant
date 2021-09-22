@@ -13,6 +13,10 @@ export const Reducer = (state = initialState, action) => {
         comment.id = state.comments.length;
         comment.date = new Date().toDateString();
         console.log(comment);
+        return {
+            ...state,
+            comments: state.comments.concat(comment)
+        }
     }
     return state;
 }
