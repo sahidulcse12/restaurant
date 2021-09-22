@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
-import DISHES from '../../data/dishes.js';
 import MenuItem from './MenuItem';
 import DishDetails from './DishDetails';
 import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { connect } from 'react-redux';
 
-const Menus = () => {
 
-    document.title = 'Menus';
+const mapStateToProps = state => {
+    return {
+        dishes: state.dishes,
+        comments: state.comments
+    }
+}
 
-    const [dishes, setDishes] = useState(DISHES);
+
+const Menu = (props) => {
+    document.title = 'Menu';
+
     const [selectedDish, setSelectedDish] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
 
     const onDishSelect = dish => {
+        //console.log(dish)
         setSelectedDish(dish);
         setModalOpen(true);
     }
@@ -25,7 +33,9 @@ const Menus = () => {
 
     let dishDetail = null;
     if (selectedDish != null) {
-        dishDetail = <DishDetails dish={selectedDish} />
+        //console.log(props.comments)
+        const comments = props.comments.filter(comment => comment.dishId === selectedDish.id)
+        dishDetail = <DishDetails dish={selectedDish} comments={comments} />
     }
 
     return (
@@ -33,10 +43,10 @@ const Menus = () => {
             <div className="row">
 
                 {
-                    dishes.map(item => <MenuItem dish={item} key={item.id} DishSelect={() => onDishSelect(item)}></MenuItem>)
+                    props.dishes.map(item => <MenuItem dish={item} key={item.id} DishSelect={() => onDishSelect(item)}></MenuItem>)
                 }
 
-                <Modal isOpen={modalOpen} onClick={toggleModal}>
+                <Modal isOpen={modalOpen}>
                     <ModalBody>
                         {dishDetail}
                     </ModalBody>
@@ -51,4 +61,4 @@ const Menus = () => {
     );
 };
 
-export default Menus;
+export default connect(mapStateToProps)(Menu);

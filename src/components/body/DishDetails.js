@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, CardBody, CardImg, CardTitle, CardText } from 'reactstrap';
+import CommentForm from './CommentForm';
 import LoadComments from './LoadComments';
 
 const DishDetails = (props) => {
-    //console.log(props)
+    console.log(props)
     return (
         <div>
             <Card style={{ marginTop: '23px' }}>
@@ -17,7 +18,9 @@ const DishDetails = (props) => {
                         Price: {props.dish.price}/-
                     </CardText>
                     <hr />
-                    <LoadComments comments={props.dish.comments} key={props.dish.id} />
+                    <LoadComments comments={props.comments} key={props.dish.id} />
+                    <hr />
+                    <CommentForm dishId={props.dish.id} />
                 </CardBody>
             </Card>
         </div>

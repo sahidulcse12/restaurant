@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Home = () => {
+const Home = (props) => {
     document.title = "Petuk Restaurent";
     return (
         <div>
