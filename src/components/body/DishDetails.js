@@ -4,7 +4,6 @@ import CommentForm from './CommentForm';
 import LoadComments from './LoadComments';
 
 const DishDetails = (props) => {
-    console.log(props)
     return (
         <div>
             <Card style={{ marginTop: '23px' }}>
@@ -20,7 +19,7 @@ const DishDetails = (props) => {
                     <hr />
                     <LoadComments comments={props.comments} key={props.dish.id} />
                     <hr />
-                    <CommentForm dishId={props.dish.id} />
+                    <CommentForm dishId={props.dish.id} addComment={props.addComment} />
                 </CardBody>
             </Card>
         </div>

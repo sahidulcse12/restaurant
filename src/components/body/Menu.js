@@ -3,12 +3,18 @@ import MenuItem from './MenuItem';
 import DishDetails from './DishDetails';
 import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-
+import { addComment } from '../../redux/actionCreators';
 
 const mapStateToProps = state => {
     return {
         dishes: state.dishes,
         comments: state.comments
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addComment: (dishId, author, rating, comment) => dispatch(addComment(dishId, author, rating, comment))
     }
 }
 
@@ -20,22 +26,19 @@ const Menu = (props) => {
     const [modalOpen, setModalOpen] = useState(false);
 
     const onDishSelect = dish => {
-        //console.log(dish)
         setSelectedDish(dish);
         setModalOpen(true);
     }
 
     const toggleModal = () => {
         setModalOpen(false);
-        //console.log(modalOpen)
     }
 
 
     let dishDetail = null;
     if (selectedDish != null) {
-        //console.log(props.comments)
         const comments = props.comments.filter(comment => comment.dishId === selectedDish.id)
-        dishDetail = <DishDetails dish={selectedDish} comments={comments} />
+        dishDetail = <DishDetails dish={selectedDish} comments={comments} addComment={props.addComment} />
     }
 
     return (
@@ -61,4 +64,4 @@ const Menu = (props) => {
     );
 };
 
-export default connect(mapStateToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Input } from 'reactstrap';
-import { connect } from 'react-redux';
 
 const CommentForm = (props) => {
-    //console.log(props)
     const [state, setState] = useState({
         author: '',
         rating: '',
@@ -18,16 +16,7 @@ const CommentForm = (props) => {
     }
 
     const handleSubmit = event => {
-        //console.log(state);
-        props.dispatch({
-            type: "ADD_COMMENT",
-            payload: {
-                dishId: props.dishId,
-                author: state.author,
-                rating: state.rating,
-                comment: state.comment
-            }
-        })
+        props.addComment(props.dishId, state.author, state.rating, state.comment)
 
         setState(prevState => ({
             ...prevState,
@@ -39,7 +28,7 @@ const CommentForm = (props) => {
     }
 
     return (
-        <div>
+        < div >
             <Form onSubmit={handleSubmit}>
                 <Input
                     type="text"
@@ -73,8 +62,8 @@ const CommentForm = (props) => {
                 <br />
                 <Button type="submit">Submit Comment</Button>
             </Form>
-        </div>
+        </div >
     );
 };
 
-export default connect()(CommentForm);
+export default CommentForm;
