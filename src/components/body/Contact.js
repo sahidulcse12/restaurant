@@ -2,6 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
 
+
+const required = val => val && val.length;
+const isNumber = val => !isNaN(Number(val));
+const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
+
 const Contact = () => {
 
     document.title = "Contact";
@@ -28,6 +33,15 @@ const Contact = () => {
     const handleSubmit = (event) => {
         console.log(contact);
         event.preventDefault();
+        setContact({
+            firstName: "",
+            lastName: "",
+            telNum: "",
+            email: "",
+            agree: false,
+            contactType: "Tel.",
+            message: ""
+        })
     }
 
 
@@ -48,6 +62,9 @@ const Contact = () => {
                                     placeholder="First Name"
                                     value={contact.firstName}
                                     onChange={handleInputChange}
+                                    validators={{
+                                        required
+                                    }}
                                 />
                             </Col>
                         </FormGroup>
@@ -60,6 +77,9 @@ const Contact = () => {
                                     placeholder="Last Name"
                                     value={contact.lastName}
                                     onChange={handleInputChange}
+                                    validators={{
+                                        required
+                                    }}
                                 />
                             </Col>
                         </FormGroup>
@@ -72,6 +92,10 @@ const Contact = () => {
                                     placeholder="Contact Tel"
                                     value={contact.telNum}
                                     onChange={handleInputChange}
+                                    validators={{
+                                        required,
+                                        isNumber
+                                    }}
                                 />
                             </Col>
                         </FormGroup>
@@ -84,6 +108,10 @@ const Contact = () => {
                                     placeholder="Email"
                                     value={contact.email}
                                     onChange={handleInputChange}
+                                    validators={{
+                                        required,
+                                        validEmail
+                                    }}
                                 />
                             </Col>
                         </FormGroup>
@@ -122,6 +150,9 @@ const Contact = () => {
                                     value={contact.message}
                                     rows="12"
                                     onChange={handleInputChange}
+                                    validators={{
+                                        required
+                                    }}
                                 />
                             </Col>
                         </FormGroup>
